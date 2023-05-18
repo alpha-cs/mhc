@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Moni's House Cleaning</title>
+    <!-- Here you'll link to your CSS and JavaScript files, as well as any libraries you're using -->
+</head>
+<body>
+    <header>
+        <img src="image/logo2.PNG" alt="Company Logo">
+    </header>
+    
+    <main>
+        <div id="language-buttons">
+            <button id="english">English</button>
+            <button id="spanish">Spanish</button>
+        </div>
+
+        <form id="price-calculator">
+            <label id="label-sqft" for="sqft">Square Footage:</label>
+            <input type="number" id="sqft" name="sqft" step="any" min="0" value="0">                    
+        
+            <label id="label-pets" for="pets">Pets:</label>
+            <select id="pets" name="pets">
+                <option id="option-no" value="no">No</option>
+                <option id="option-yes" value="yes">Yes</option>
+            </select>
+        
+            <label id="label-laundry" for="laundry">Laundry:</label>
+            <select id="laundry" name="laundry">
+                <option id="option-no2" value="no">No</option>
+                <option id="option-yes2" value="yes">Yes</option>
+            </select>
+        
+            <label id="label-stairs" for="stairs">Stairs (stories):</label>
+            <input type="number" id="stairs" name="stairs" min="0" value="0">
+        
+            <label id="label-extra" for="extra">Extras:</label>
+            <input type="number" id="extra" name="extra" min="0" value="0">
+        
+            <input id="calculate-button" type="submit" value="Calculate">
+        </form>
+        
+        <!-- Here you can display the price after the user submits the form -->
+        <div id="price-display">Price: $</div>
+        <button id="clear-history" type="reset">Clear History</button>
+        <div id="price-history"></div>
+    </main>
+    <footer>
+        <p>Please note that prices provided by our online calculator are estimates and are subject to final confirmation. The actual price may vary based on a variety of factors, including but not limited to, the condition of the property, the specific services requested, and other factors at the cleaner's discretion. All services are subject to our standard terms and conditions.</p>
+    </footer>    
+    <!-- Here is where your JavaScript code will go -->
+    <script src="main.js"></script>
+</body>
+</html>
