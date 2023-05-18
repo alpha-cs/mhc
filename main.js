@@ -13,6 +13,7 @@ document.getElementById('price-calculator').addEventListener('submit', function 
   const stairs = getSelectedStairs();
   const laundry = document.getElementById('laundry').value;
   const extra = parseFloat(document.getElementById('extra').value);
+  const deepClean = document.getElementById('deep-clean').value;
 
   // Calculate the price
   let rate = 0.11;
@@ -25,6 +26,9 @@ document.getElementById('price-calculator').addEventListener('submit', function 
   }
   if (extra > 0) {
     rate += 0.01 * extra;
+  }
+  if (deepClean === 'yes') {
+    rate += 0.11;
   }
   let price = rate * sqft;
   if (price < 140) {
@@ -41,7 +45,8 @@ document.getElementById('price-calculator').addEventListener('submit', function 
     lastEntry.pets === pets &&
     lastEntry.stairs === stairs &&
     lastEntry.laundry === laundry &&
-    lastEntry.extra === extra
+    lastEntry.extra === extra &&
+    lastEntry.deepClean === deepClean
   ) {
     return; // Skip adding the entry to the price history
   }
@@ -53,6 +58,7 @@ document.getElementById('price-calculator').addEventListener('submit', function 
     stairs: stairs,
     laundry: laundry,
     extra: extra,
+    deepClean: deepClean,
   };
 
   // Update the price history (maximum of 6 entries)
@@ -69,6 +75,7 @@ document.getElementById('price-calculator').addEventListener('submit', function 
     stairs: stairs,
     laundry: laundry,
     extra: extra,
+    deepClean: deepClean,
   });
 
   // Clear the price history display and add all entries from the array
@@ -81,7 +88,8 @@ document.getElementById('price-calculator').addEventListener('submit', function 
       `${priceHistory[i].pets === 'yes' ? ', Pets: ✔️' : ''}` +
       `${priceHistory[i].stairs > 0 ? ', Stairs: ' + priceHistory[i].stairs : ''}` +
       `${priceHistory[i].laundry === 'yes' ? ', Laundry: ✔️' : ''}` +
-      `${priceHistory[i].extra > 0 ? ', Extra: ' + priceHistory[i].extra : ''}`;
+      `${priceHistory[i].extra > 0 ? ', Extra: ' + priceHistory[i].extra : ''}` +
+      `${priceHistory[i].deepClean === 'yes' ? ', Deep Clean: ✔️' : ''}`;
     historyDisplay.insertAdjacentElement('afterbegin', item);
   }
 });
@@ -91,6 +99,7 @@ document.getElementById('sqft').addEventListener('input', updatePrice);
 document.getElementById('pets').addEventListener('input', updatePrice);
 document.getElementById('laundry').addEventListener('input', updatePrice);
 document.getElementById('extra').addEventListener('input', updatePrice);
+document.getElementById('deep-clean').addEventListener('input', updatePrice);
 
 // Function to get the selected stairs value
 function getSelectedStairs() {
@@ -138,6 +147,7 @@ function updatePrice() {
   const stairs = getSelectedStairs();
   const laundry = document.getElementById('laundry').value;
   const extra = parseFloat(document.getElementById('extra').value);
+  const deepClean = document.getElementById('deep-clean').value;
 
   // Calculate the price
   let rate = 0.11;
@@ -150,6 +160,9 @@ function updatePrice() {
   }
   if (extra > 0) {
     rate += 0.01 * extra;
+  }
+  if (deepClean === 'yes') {
+    rate += 0.11;
   }
   let price = rate * sqft;
   if (price < 140) {

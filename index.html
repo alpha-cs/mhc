@@ -20,35 +20,39 @@
 
         <form id="price-calculator">
             <label id="label-sqft" for="sqft">Square Footage:</label>
-            <input type="number" id="sqft" name="sqft" step="any" min="0" value="0">                    
-        
+            <input type="number" id="sqft" name="sqft" step="any" min="0" value="0">
+          
+            <label id="label-deep-clean" for="deep-clean">Deep Clean:</label>
+            <select id="deep-clean" name="deep-clean">
+              <option id="option-no3" value="no">No</option>
+              <option id="option-yes3" value="yes">Yes</option>
+            </select>
+          
             <label id="label-pets" for="pets">Pets:</label>
             <select id="pets" name="pets">
-                <option id="option-no" value="no">No</option>
-                <option id="option-yes" value="yes">Yes</option>
+              <option id="option-no" value="no">No</option>
+              <option id="option-yes" value="yes">Yes</option>
             </select>
-        
+          
             <label id="label-laundry" for="laundry">Laundry: (1 max)</label>
             <select id="laundry" name="laundry">
-                <option id="option-no2" value="no">No</option>
-                <option id="option-yes2" value="yes">Yes</option>
+              <option id="option-no2" value="no">No</option>
+              <option id="option-yes2" value="yes">Yes</option>
             </select>
-        
-            <!-- <label id="label-stairs" for="stairs">Stairs (stories):</label>
-            <input type="number" id="stairs" name="stairs" min="0" value="0"> -->
-
+          
             <label id="label-stairs" for="stairs">Stairs (stories):</label>
             <div class="stairs-buttons">
               <button id="stairs-0" class="stairs-button" value="0">0</button>
               <button id="stairs-1" class="stairs-button" value="1">1</button>
               <button id="stairs-2" class="stairs-button" value="2">2</button>
             </div>
-        
+          
             <label id="label-extra" for="extra">Extras:</label>
             <input type="number" id="extra" name="extra" min="0" value="0">
-        
+          
             <input id="calculate-button" type="submit" value="Calculate">
-        </form>
+          </form>
+          
         
         <!-- Here you can display the price after the user submits the form -->
         <div id="price-display">Price: $</div>
