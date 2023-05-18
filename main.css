@@ -21,6 +21,28 @@ header img {
     display: block;
 }
 
+.stairs-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 5px;
+  }
+  
+  .stairs-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .stairs-button.selected {
+    background-color: #2ecf77;
+    color: #ffffff;
+  }
+  
+
 form {
     max-width: 500px; 
     margin: 20px auto;
@@ -130,7 +152,7 @@ form button[type="reset"]:hover {
 
 #clear-history:hover {
     background-color: #e6e6e6;
-}
+}  
 
 #price-history {
     max-width: 500px;

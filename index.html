@@ -28,14 +28,21 @@
                 <option id="option-yes" value="yes">Yes</option>
             </select>
         
-            <label id="label-laundry" for="laundry">Laundry:</label>
+            <label id="label-laundry" for="laundry">Laundry: (1 max)</label>
             <select id="laundry" name="laundry">
                 <option id="option-no2" value="no">No</option>
                 <option id="option-yes2" value="yes">Yes</option>
             </select>
         
+            <!-- <label id="label-stairs" for="stairs">Stairs (stories):</label>
+            <input type="number" id="stairs" name="stairs" min="0" value="0"> -->
+
             <label id="label-stairs" for="stairs">Stairs (stories):</label>
-            <input type="number" id="stairs" name="stairs" min="0" value="0">
+            <div class="stairs-buttons">
+              <button id="stairs-0" class="stairs-button" value="0">0</button>
+              <button id="stairs-1" class="stairs-button" value="1">1</button>
+              <button id="stairs-2" class="stairs-button" value="2">2</button>
+            </div>
         
             <label id="label-extra" for="extra">Extras:</label>
             <input type="number" id="extra" name="extra" min="0" value="0">
