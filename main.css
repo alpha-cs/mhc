@@ -89,6 +89,16 @@ form input[type="submit"]:hover {
     margin-top: 20px;
 }
 
+#price-display .price {
+    color: #25a55f; /* Green color */
+}
+  
+  #price-display .price::before {
+    content: "$";
+    color: #25a55f; /* Green color */
+}
+  
+
 footer {
     text-align: center;
     padding: 20px;
@@ -175,6 +185,10 @@ form button[type="reset"]:hover {
     padding: 10px;
     border-bottom: 1px solid #ddd;
 }
+
+#price-history p .price {
+    color: #25a55f; /* Green color */
+  }
 
 
 /* Mobile styles */

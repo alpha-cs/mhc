@@ -8,15 +8,28 @@ document.getElementById('price-calculator').addEventListener('submit', function 
   event.preventDefault(); // Prevent form submission in the traditional way
 
   // Get the form values
-  const sqft = parseFloat(document.getElementById('sqft').value);
+  const sqftInput = document.getElementById('sqft');
+  let sqft = parseFloat(sqftInput.value);
+  if (isNaN(sqft) || sqft === null || sqft.toString().toLowerCase() === "sqft: nan") {
+    sqft = 0; // Set sqft to 0 if input is NaN or null or "SqFt: NaN"
+  }
   const pets = document.getElementById('pets').value;
   const stairs = getSelectedStairs();
   const laundry = document.getElementById('laundry').value;
-  const extra = parseFloat(document.getElementById('extra').value);
+
+  let extraInput = document.getElementById('extra');
+  let extra = parseFloat(extraInput.value);
+  if (isNaN(extra) || extra === null || extra.toString().toLowerCase() === "extra: nan") {
+    extra = 0; // Set extra to 0 if input is NaN or null or "Extra: NaN"
+  }
+
   const deepClean = document.getElementById('deep-clean').value;
 
   // Calculate the price
   let rate = 0.11;
+  if (deepClean === 'yes') {
+    rate *= 2;
+  }
   if (pets === 'yes') {
     rate += 0.01;
   }
@@ -27,16 +40,14 @@ document.getElementById('price-calculator').addEventListener('submit', function 
   if (extra > 0) {
     rate += 0.01 * extra;
   }
-  if (deepClean === 'yes') {
-    rate += 0.11;
-  }
   let price = rate * sqft;
   if (price < 140) {
     price = 140;
   }
 
-  // Display the price with limited decimal points
-  document.getElementById('price-display').textContent = 'Price: $' + price.toFixed(2);
+  // Display the price with the updated number value color
+  const priceDisplay = document.getElementById('price-display');
+  priceDisplay.innerHTML = `Price: <span class="price">${price.toFixed(2)}</span>`;
 
   // Check if the current form inputs are the same as the last entry
   if (
@@ -66,32 +77,33 @@ document.getElementById('price-calculator').addEventListener('submit', function 
     priceHistory.shift(); // Remove the oldest entry if we have 6 already
   }
 
-  // Add the new entry to the history
-  priceHistory.push({
-    id: counter++,
-    price: price.toFixed(2),
-    sqft: sqft,
-    pets: pets,
-    stairs: stairs,
-    laundry: laundry,
-    extra: extra,
-    deepClean: deepClean,
-  });
+// Add the new entry to the history
+priceHistory.push({
+  id: counter++,
+  price: price.toFixed(2),
+  sqft: sqft,
+  pets: pets,
+  stairs: stairs,
+  laundry: laundry,
+  extra: extra,
+  deepClean: deepClean,
+});
 
-  // Clear the price history display and add all entries from the array
-  let historyDisplay = document.getElementById('price-history');
-  historyDisplay.innerHTML = '';
-  for (let i = 0; i < priceHistory.length; i++) {
-    let item = document.createElement('p');
-    item.textContent =
-      `ID: ${priceHistory[i].id}, Price: $${priceHistory[i].price}, SqFt: ${priceHistory[i].sqft}` +
-      `${priceHistory[i].pets === 'yes' ? ', Pets: ✔️' : ''}` +
-      `${priceHistory[i].stairs > 0 ? ', Stairs: ' + priceHistory[i].stairs : ''}` +
-      `${priceHistory[i].laundry === 'yes' ? ', Laundry: ✔️' : ''}` +
-      `${priceHistory[i].extra > 0 ? ', Extra: ' + priceHistory[i].extra : ''}` +
-      `${priceHistory[i].deepClean === 'yes' ? ', Deep Clean: ✔️' : ''}`;
-    historyDisplay.insertAdjacentElement('afterbegin', item);
-  }
+// Clear the price history display and add all entries from the array
+let historyDisplay = document.getElementById('price-history');
+historyDisplay.innerHTML = '';
+for (let i = 0; i < priceHistory.length; i++) {
+  let item = document.createElement('p');
+  item.innerHTML =
+    `Price: <span class="price">$${priceHistory[i].price}</span>, SqFt: ${priceHistory[i].sqft}` +
+    `${priceHistory[i].pets === 'yes' ? ', Pets: &#10004;' : ''}` +
+    `${priceHistory[i].stairs > 0 ? ', Stairs: ' + priceHistory[i].stairs : ''}` +
+    `${priceHistory[i].laundry === 'yes' ? ', Laundry: &#10004;' : ''}` +
+    `${priceHistory[i].extra > 0 ? ', Extra: ' + priceHistory[i].extra : ''}` +
+    `${priceHistory[i].deepClean === 'yes' ? ', Deep Clean: &#10004;' : ''}`;
+  historyDisplay.insertAdjacentElement('afterbegin', item);
+}
+
 });
 
 // Price Calculator Form Input Event Listeners
@@ -141,16 +153,28 @@ stairsButtons.forEach((button) => {
 
 // Function to update the price when input fields change
 function updatePrice() {
-  // Get the form values
-  const sqft = parseFloat(document.getElementById('sqft').value);
+  const sqftInput = document.getElementById('sqft');
+  let sqft = parseFloat(sqftInput.value);
+  if (isNaN(sqft) || sqft === null || sqft.toString().toLowerCase() === "sqft: nan") {
+    sqft = 0; // Set sqft to 0 if input is NaN or null or "SqFt: NaN"
+  }
   const pets = document.getElementById('pets').value;
   const stairs = getSelectedStairs();
   const laundry = document.getElementById('laundry').value;
-  const extra = parseFloat(document.getElementById('extra').value);
+
+  let extraInput = document.getElementById('extra');
+  let extra = parseFloat(extraInput.value);
+  if (isNaN(extra) || extra === null || extra.toString().toLowerCase() === "extra: nan") {
+    extra = 0; // Set extra to 0 if input is NaN or null or "Extra: NaN"
+  }
+  
   const deepClean = document.getElementById('deep-clean').value;
 
   // Calculate the price
   let rate = 0.11;
+  if (deepClean === 'yes') {
+    rate *= 2;
+  }
   if (pets === 'yes') {
     rate += 0.01;
   }
@@ -161,16 +185,14 @@ function updatePrice() {
   if (extra > 0) {
     rate += 0.01 * extra;
   }
-  if (deepClean === 'yes') {
-    rate += 0.11;
-  }
   let price = rate * sqft;
   if (price < 140) {
     price = 140;
   }
 
-  // Display the price with limited decimal points
-  document.getElementById('price-display').textContent = 'Price: $' + price.toFixed(2);
+  // Display the price with the updated number value color
+  const priceDisplay = document.getElementById('price-display');
+  priceDisplay.innerHTML = `Price: <span class="price">${price.toFixed(2)}</span>`;
 }
 
 // Clear History Button Click Event Listener
